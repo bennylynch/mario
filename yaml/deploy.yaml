@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: safe-template
+  labels:
+    app: safe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: safe
+  template:
+    metadata:
+      labels:
+        app: safe
+    spec:
+      containers:
+      - name: safe-template
+        image: bennylynch/safe-template:latest
+        ports:
+        - containerPort: 8085
