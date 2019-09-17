@@ -24,7 +24,7 @@ let withImg (src : string) =
     let ctx = context
     //let img = HTMLImageElement.Create()
     let img = document.createElement("img") :?> HTMLImageElement
-    console.log src
+    //console.log src
     img.src <- src
     ctx.drawImage(!^ img,0.,0.)
 

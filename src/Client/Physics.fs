@@ -1,9 +1,6 @@
 module Mario.Physics
+open Mario.Model
 
-type MarioBeerModel =
-  { x:float; y:float;
-    vx:float; vy:float;
-    dir:string }
 
 
 // If the Up key is pressed (y > 0) and Mario is on the ground,
@@ -30,22 +27,26 @@ let walk (x,_)  m =
   let dir = if x < 0 then "left" elif x > 0 then "right" else m.dir
   { m with vx = float x; dir = dir }
 
-let beerStep (w,_) b =
-    if (b.dir = "right") then
-        match (b.x + 1.7) with
-        |x when x > w / 2. - 10. ->
-                { b with x = b.x - 1.7 + 10.; y = 0.; dir="left"}
-        |_ ->
-                { b with x = b.x + 1.7; y = 0.}
-    else
-        match (b.x - 1.7) with
-        |x when x < - w / 2. + 10.->
-                { b with x = b.x + 1.7 - 10. ; y = 0.; dir="right"}
-        |_ ->
-                { b with x = b.x - 1.7; y = 0.}
-let marioStep dir (w,h) mario =
-  mario
-  |> physics (w,h)
-  |> walk dir
-  |> gravity
-  |> jump dir
+let modelStep (w,h) dir (model : Model) =
+    let b = model.Beer
+    let m = model.Mario
+    let beer =
+        if (b.dir = "right") then
+            match (b.x + 1.7) with
+            |x when x > w / 2. - 10. ->
+                    { b with x = b.x - 1.7 + 10.; y = 0.; dir="left"}
+            |_ ->
+                    { b with x = b.x + 1.7; y = 0.}
+        else
+            match (b.x - 1.7) with
+            |x when x < - w / 2. + 10.->
+                    { b with x = b.x + 1.7 - 10. ; y = 0.; dir="right"}
+            |_ ->
+                    { b with x = b.x - 1.7; y = 0.}
+    let mario =
+      m
+      |> physics (w,h)
+      |> walk dir
+      |> gravity
+      |> jump dir
+    { model with Mario = mario; Beer = beer; Board = model.Board }

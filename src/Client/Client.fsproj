@@ -9,6 +9,7 @@
         <None Include="paket.references" />
         <None Include="style.scss" />
         <Compile Include="Keyboard.fs" />
+        <Compile Include="Model.fs" />
         <Compile Include="Board.fs" />
         <Compile Include="Canvas.fs" />
         <Compile Include="Physics.fs" />
