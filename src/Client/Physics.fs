@@ -2,25 +2,49 @@ module Mario.Physics
 open Mario.Model
 
 
-
+let board = Board.board |> Array.mapi (fun row cols  ->
+                cols.ToCharArray() |> Array.mapi  (fun col c ->
+                    let isPlatform =
+                        match c with
+                            |'_' -> 1
+                            |' ' -> 0
+                            |ch  -> 0
+                    isPlatform, (float (col * 64) , float (row * 64)) //, 64. , 20.)
+                )
+            )
+Browser.Dom.console.log board
 // If the Up key is pressed (y > 0) and Mario is on the ground,
 // then create Mario with the y velocity 'vy' set to 5.0
 let jump (_,y) m =
-  if y > 0 && m.y = 0. then { m with vy = 5. } else m
+  if y > 0 && m.y = 0. then { m with vy = 10. } else m
 
 // If Mario is in the air, then his "up" velocity is decreasing
-let gravity m =
-  if m.y > 0. then { m with vy = m.vy - 0.1 } else m
 
+let gravity m =
+  if m.y > 0. then { m with vy = m.vy - 0.2 } else m
+
+let findBoardCell (m : SpriteModel)  =
+    let X,Y  = int (m.x / float Board.width) , int (m.y / float Board.heght)
+    let cell = board.[X].[Y]
+    //Browser.Dom.console.log cell
+    cell
 // Apply physics - move Mario according to the current velocities
-let physics (w,h) m =
+// when he hits a platform, vy <- 0
+let physics (w,_) m =
+  let newY = match m |> findBoardCell with
+             |0, (x,y) -> max 0. (m.y + m.vy)
+             |_ as isPlatfrom, (x,y) ->
+                Browser.Dom.console.log (isPlatfrom , y)
+                max y  (m.y + m.vy)
+
+
   match (m.x + m.vx) with
   |x when x > w / 2. - 8. ->
-        { m with x = -w/2. + 8.; y = max 0. (m.y + m.vy)}
+        { m with x = -w/2. + 8.; y = newY }
   |x when x < - w / 2. + 8.->
-        { m with x = w/2. - 8.; y = max 0. (m.y + m.vy)}
+        { m with x = w/2. - 8.; y = newY}
   |_ ->
-        { m with x = m.x + m.vx; y = max 0. (m.y + m.vy) }
+        { m with x = m.x + m.vx; y = newY }
 
 // When Left/Right keys are pressed, change 'vx' and direction
 let walk (x,_)  m =
