@@ -34,7 +34,7 @@ let model = {
     Board = Board.board
 }
 let initRender (w,h) (model : Model ) =
-    (0., 0., w, h) |> filled (rgb 174 238 238)
+    (0., 0., w, h)      |> filled (rgb 174 238 238)
     (0., h-50., w, 50.) |> filled (rgb 74 163 41)
     model.Board |> Seq.iteri (fun row cols  ->
         cols |> Seq.iteri  (fun col c ->
