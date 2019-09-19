@@ -20,13 +20,10 @@ let filled (color: string) rect =
     ctx.fillStyle <- !^ color
     ctx.fillRect rect
 
-let withImg (src : string) =
-    let ctx = context
-    //let img = HTMLImageElement.Create()
-    let img = document.createElement("img") :?> HTMLImageElement
-    //console.log src
-    img.src <- src
-    ctx.drawImage(!^ img,0.,0.)
+let drawText s (x,y) =
+    let ctx = canvas.getContext_2d()
+    ctx.font <- "50px sansserif"
+    ctx.fillText(s.ToString(),x,y)
 
 /// Move element to a specified X Y position
 let position (x,y) (img : HTMLImageElement) =
