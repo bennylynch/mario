@@ -11,7 +11,7 @@ let width,heght = 1024 , 768 // 16 * 12. each set 64
 let board = ("""
                 ,
                 ,
-                ,
+      __        ,
   ___           ,
         ____    ,
             ____,
@@ -19,4 +19,5 @@ let board = ("""
 ___             ,
       ___       ,
             ____,
+                ,
                 """).Split([|',';'\r';'\n'|], StringSplitOptions.RemoveEmptyEntries )

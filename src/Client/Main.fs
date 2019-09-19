@@ -29,10 +29,11 @@ let rec update model () =
     window.setTimeout(update newModel, 1000 / 60) |> ignore
 
 let model = {
-    Mario = { x=0.; y=0.; vx=0.; vy=0.; dir="right" }
-    Beer = { x=0.; y=0.; vx=0.; vy=0.; dir="right" }
+    Mario = { x=0.; y=0.; vx=0.; vy=0.; dir="right"; isonplatform=true }
+    Beer = { x=0.; y=0.; vx=0.; vy=0.; dir="right"; isonplatform=true }
     Board = Board.board
 }
+
 let initRender (w,h) (model : Model ) =
     (0., 0., w, h)      |> filled (rgb 174 238 238)
     (0., h-50., w, 50.) |> filled (rgb 74 163 41)

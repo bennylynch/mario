@@ -22,3 +22,4 @@ let boardy = board |> Array.mapi (fun row cols  ->
                             |ch  -> 0
                     isPlatform, ( float col , float row - h ) //, 64. , 20.)
                 ))
+w / float boardy.[0].Length
