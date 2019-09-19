@@ -4,13 +4,13 @@ open System
 let board = ("""
                 ,
                 ,
-                ,
+_               ,
   ___           ,
                 ,
 _             __,
-         ____   ,
-                ,
-     ___        ,
                 ,
                 ,
+_    ___        ,
+                ,
+_               ,
                 """).Split([|',';'\r';'\n'|], StringSplitOptions.RemoveEmptyEntries )
