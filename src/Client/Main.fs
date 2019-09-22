@@ -25,9 +25,10 @@ Keyboard.initKeyboard()
 let rec update model () =
     let newModel = model |> modelStep (Keyboard.arrows())
     render newModel
-    // if ((int newModel.Mario.x = int newModel.Beer.x) &&
-    //     (newModel.Mario.y = newModel.Beer.y)) then
-    //     window.alert "Dead"
+    if ((int newModel.Mario.x = int newModel.Beer.x) &&
+        (newModel.Mario.y = newModel.Beer.y))
+        then "images/gamover.gif" |> image "fireworks" |> position (0.,0.)
+
     if (newModel.Mario.y >= h - 50. && newModel.Mario.x < 50.)
         then "images/fireworks.gif" |> image "fireworks" |> position (0.,0.)
     else
