@@ -8,6 +8,6 @@ type SpriteModel =
 
 type Model = {
     Mario : SpriteModel
-    Beer : SpriteModel
+    Beer : SpriteModel //[]
     Board : string []
 }

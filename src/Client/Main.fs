@@ -27,10 +27,12 @@ let rec update model () =
     render newModel
     if ((int newModel.Mario.x = int newModel.Beer.x) &&
         (newModel.Mario.y = newModel.Beer.y))
-        then "images/gamover.gif" |> image "fireworks" |> position (0.,0.)
+        then "images/gameover.gif" |> image "fireworks" |> position (8.,0.)
 
     if (newModel.Mario.y >= h - 50. && newModel.Mario.x < 50.)
-        then "images/fireworks.gif" |> image "fireworks" |> position (0.,0.)
+        then
+        window.setTimeout(window.location.assign("http://www.laterrazawalton.com"), 50000) |> ignore
+        "images/fireworks.gif" |> image "fireworks" |> position (8.,0.)
     else
     window.setTimeout(update newModel, 1000 / 60) |> ignore
 
