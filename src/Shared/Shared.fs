@@ -1,5 +1,2 @@
 namespace Shared
-
-type Counter = { Value : int }
-
-
+type a = string

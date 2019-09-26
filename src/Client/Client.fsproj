@@ -8,6 +8,7 @@
         <None Include="index.html" />
         <None Include="paket.references" />
         <None Include="style.scss" />
+        <None Include="Board.txt" />
         <Compile Include="Keyboard.fs" />
         <Compile Include="Model.fs" />
         <Compile Include="Board.fs" />
